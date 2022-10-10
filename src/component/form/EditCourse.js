@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
@@ -43,7 +43,7 @@ const EditCourse = () => {
       fees: course.fees,
       duration: course.duration,
       discription: course.discription,
-      file: course.file.name,
+      file: course.file,
       profile: course.banner,
     };
 
@@ -69,34 +69,18 @@ const EditCourse = () => {
       <div>
         <div className="container-fluid">
           <div className="max-width-container application-container mx-auto mt-3">
-            <h4 className="fw-bold">Edit Course </h4>
+            <h4 className="fw-bold">
+              {" "}
+              <Link to="/all-courses" className="pagesLink-wrap">
+                Edit Course
+              </Link>{" "}
+            </h4>
 
             <div id="assesment-container" className="mt-4">
               <div className="application_cover-letter">
                 <form onSubmit={EditCourseData}>
                   <div className="row py-3">
-                    <div className="col-md-4">
-                      <div className="studentimg-wrapper">
-                        <img
-                          src="/img/photo.png"
-                          alt="Photo"
-                          className="img-fluid"
-                        />
-
-                        <label className="file-input-wrapp">
-                          <button className="AddPhoto-btn">
-                            Add Banner
-                            <i className="fa-solid fa-upload ms-2"></i>
-                          </button>
-                          <input
-                            type="file"
-                            className="file-input"
-                            onChange={(e) => SetCourse(e.target.value)}
-                          />
-                        </label>
-                      </div>
-                    </div>
-                    <div className="col-md-8">
+                    <div className="col-12">
                       <div
                         className="
       editsinput-wrapp"
@@ -156,12 +140,13 @@ const EditCourse = () => {
                           <input
                             type="file"
                             // onChange={(e) => Setfile(e.target.value)}
+                            Value={course.file}
                             onChange={(e) =>
-                              SetCourse({ ...course, file: e.target.files[0] })
+                              SetCourse({ ...course, file: e.target.files[1] })
                             }
-                            required
                             className="pdf-file "
                           />
+                          {course.file}
                         </div>
                       </div>
                     </div>

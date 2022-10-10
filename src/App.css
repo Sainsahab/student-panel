@@ -1201,6 +1201,14 @@ a {
   outline: none;
   margin-bottom: 13px;
 }
+.editinputform-date {
+  border: none;
+  width: 40%;
+  margin-left: 10px;
+  border-bottom: 1px dotted #000;
+  outline: none;
+  margin-bottom: 13px;
+}
 .application_cover-letter .panel-group {
   padding: 6px;
   font-size: 14px;
@@ -1795,6 +1803,11 @@ table td.optionsColumn .dropdown i {
   cursor: pointer;
   justify-content: space-between;
   width: 90px;
+}
+.optionsColumns {
+  display: flex;
+  cursor: pointer;
+  justify-content: space-between;
 }
 
 .modal .assignment_attachment:hover {

@@ -268,16 +268,15 @@ const Studentdatatest = () => {
 
                         <Moment format="YYYY/MM/DD">{student.dob}</Moment>
                         <input
-                          type="date"
                           format="YYYY/MM/DD"
                           className="datebirth"
                           value={student.dob}
-                          onChange={(e) =>
-                            SetStudent({
-                              ...student,
-                              dob: e.target.value,
-                            })
-                          }
+                          // onChange={(e) =>
+                          //   SetStudent({
+                          //     ...student,
+                          //     dob: e.target.value,
+                          //   })
+                          // }
                         />
                       </div>
                     </div>
@@ -287,7 +286,7 @@ const Studentdatatest = () => {
                         <input
                           type="text"
                           className="datebirth"
-                          defaultValue={student.age}
+                          Value={student.age}
                           onChange={(e) =>
                             SetStudent({
                               ...student,

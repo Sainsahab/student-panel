@@ -5,6 +5,7 @@ import { Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import axios from "axios";
 import { toast } from "react-toastify";
+import ReactPaginate from "react-paginate";
 const AllCourse = () => {
   const [course, Setcourse] = useState([]);
   const [currentPagenation, setcurrentPagenation] = useState("");
@@ -52,83 +53,89 @@ const AllCourse = () => {
             </Link>
           </h2>
           <div className="row">
-            {course.map((item, index) => {
-              return (
-                <>
-                  <div className="col-md-4" key={index}>
-                    <div className="course-card text-center">
-                      <span className="trash-wrap">
-                        <i className="fa-solid fa-trash"></i>
-                      </span>
-                      <img
-                        src="https://files.benramsey.com/ws/projects/php/php-logo-banner-1500x630.png"
-                        className="img img-responsive"
-                        alt="Course Banner img"
-                      />
-                      <div className="profile-content">
-                        <div className="profile-name">{item.title}</div>
-                        <div className="profile-description">
-                          {item.discription}
-                        </div>
-                        <div className="row">
-                          <div className="col-3">
-                            <div className="profile-overview">
-                              <div>
-                                <span>
-                                  <i className="fa-brands fa-slack me-2"></i>
-                                  {item.fees}
-                                </span>
+            <div className="col-md-12">
+              <div className="table table-wrapp">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Title</th>
+                      <th scope="col">Discription</th>
+                      <th scope="col" className="actionColumn">
+                        Duration
+                      </th>
+                      <th scope="col">fees</th>
+                      <th scope="col">Edit</th>
+                    </tr>
+                  </thead>
+                  {course.map((item, index) => {
+                    return (
+                      <>
+                        <tbody>
+                          <tr key={index}>
+                            <td id="profileColumn" className="profileColumn">
+                              <div className="profile_and_premium">
+                                <div className="text">
+                                  <span className="student-nametag">
+                                    {item.title}af
+                                  </span>{" "}
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                          <div className="col-4">
-                            <div className="profile-overview">
-                              <div>
-                                <span>
-                                  <i className="fa-solid fa-graduation-cap me-1"></i>
-                                  {item.duration}
-                                </span>
+                            </td>
+                            <td className="status statusColumn">
+                              {item.discription}
+                            </td>
+                            <td className="status statusColumn">
+                              {item.duration}
+                            </td>
+                            <td className="applicationcountColumn">
+                              {item.fees}
+                            </td>
+
+                            <td className="optionsColumn">
+                              <Link
+                                to={"/edit-course/" + item._id}
+                                className="edit-icon"
+                              >
+                                <i className="fa-regular fa-pen-to-square"></i>
+                              </Link>
+                              <span
+                                onClick={() => deleteCourse(item._id)}
+                                className="ms-3"
+                              >
+                                <i className="fa-solid fa-trash"></i>
+                              </span>
+                              <div className="col-2">
+                                <div className="profile-overview">
+                                  <div>
+                                    <a
+                                      href={item.file}
+                                      target="blank"
+                                      rel="noreferrer"
+                                    >
+                                      <i className="fa-solid fa-download me-2"></i>
+                                    </a>
+                                  </div>
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                          <div className="col-3">
-                            <div className="profile-overview">
-                              <div>
-                                <Link
-                                  to={"/edit-course/" + item._id}
-                                  className="edit-icon"
-                                >
-                                  <i className="fa-regular fa-pen-to-square"></i>
-                                </Link>
-                                <span
-                                  onClick={() => deleteCourse(item._id)}
-                                  className="ms-3"
-                                >
-                                  <i className="fa-solid fa-trash"></i>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-2">
-                            <div className="profile-overview">
-                              <div>
-                                <a
-                                  href={item.file}
-                                  target="blank"
-                                  rel="noreferrer"
-                                >
-                                  <i className="fa-solid fa-download me-2"></i>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              );
-            })}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </>
+                    );
+                  })}
+                </table>
+              </div>
+              {/*  <ReactPaginate
+                breakLabel="..."
+                nextLabel=">"
+                onPageChange={(e) => setPage(e.selected + 1)}
+                pageRangeDisplayed={currentPagenation.currentPage}
+                pageCount={currentPagenation.totalPages}
+                previousLabel="<"
+                renderOnZeroPageCount={null}
+                className="reactpagination-wrapp"
+              />*/}
+            </div>
           </div>
         </div>
       </div>

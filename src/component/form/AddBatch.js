@@ -48,7 +48,11 @@ const AdBatch = () => {
       <div>
         <div className="container-fluid">
           <div className="max-width-container application-container mx-auto mt-3">
-            <h4 className="fw-bold"> Add Batch </h4>
+            <h4 className="fw-bold">
+              <Link to="/batchs" className="pagesLink-wrap">
+                Add Batch
+              </Link>{" "}
+            </h4>
 
             <div id="assesment-container" className="mt-4">
               <div className="application_cover-letter">

@@ -77,7 +77,12 @@ const AddFaculty = () => {
       <div>
         <div className="container-fluid">
           <div className="max-width-container application-container mx-auto mt-3">
-            <h4 className="fw-bold"> Add Faculty </h4>
+            <h4 className="fw-bold">
+              <Link to="/all-faculty" className="pagesLink-wrap">
+                {" "}
+                Add Faculty{" "}
+              </Link>
+            </h4>
 
             <div id="assesment-container" className="mt-4">
               <div className="application_cover-letter">
@@ -89,7 +94,7 @@ const AddFaculty = () => {
 
                 <form action="" onSubmit={FacultyAdd}>
                   <div className="row py-3">
-                    <div className="col-md-8">
+                    <div className="col-md-12">
                       <div
                         className="
             editsinput-wrapp"
@@ -137,22 +142,6 @@ const AddFaculty = () => {
                             className="editinputform"
                           />
                         </div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="studentimg-wrapper">
-                        <img
-                          src="/img/photo.png"
-                          alt="Photo"
-                          className="img-fluid"
-                        />
-
-                        <label className="file-input-wrapp">
-                          <button className="AddPhoto-btn">
-                            Add photo<i className="fa-solid fa-upload ms-2"></i>
-                          </button>
-                          <input type="file" className="file-input" />
-                        </label>
                       </div>
                     </div>
                   </div>

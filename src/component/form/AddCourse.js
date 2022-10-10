@@ -59,28 +59,7 @@ const AddCourse = () => {
               <div className="application_cover-letter">
                 <form onSubmit={CoursesAdd}>
                   <div className="row py-3">
-                    <div className="col-md-4">
-                      <div className="studentimg-wrapper">
-                        <img
-                          src="/img/photo.png"
-                          alt="Photo"
-                          className="img-fluid"
-                        />
-
-                        <label className="file-input-wrapp">
-                          <button className="AddPhoto-btn">
-                            Add Banner
-                            <i className="fa-solid fa-upload ms-2"></i>
-                          </button>
-                          <input
-                            type="file"
-                            className="file-input"
-                            onChange={(e) => Setbanneer(e.target.value)}
-                          />
-                        </label>
-                      </div>
-                    </div>
-                    <div className="col-md-8">
+                    <div className="col-md-12">
                       <div
                         className="
         editsinput-wrapp"

@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import MultiSelect from "react-multiple-select-dropdown-lite";
-import intrestedcourse from "./Intrestedcourse.json";
-import moment from "moment";
 import { useNavigate } from "react-router-dom";
 const AddStudent = () => {
   const [title, SetTitle] = useState("");
@@ -19,12 +17,6 @@ const AddStudent = () => {
   const [source, SetSource] = useState("");
   const [other, SetOther] = useState("");
   console.log(courseintrest);
-  // const courses = [];
-  // console.log(courses);
-  // const getCoure = () => {
-  //   courses.push(courseintrest);
-  // };
-
   const [course, SetsCourses] = useState();
   const navigate = useNavigate();
 
@@ -140,44 +132,8 @@ const AddStudent = () => {
               <div className="row">
                 <div className="col-sm-12">
                   <div className="form-outline ">
-                    {/* <select
-                      className="form-control  inputbg-wrap"
-                      required
-                      onChange={(e) => {
-                        SetCourses(e.target.value);
-                      }}
-                    ></select> 
-                   
-                    <select
-                      name="courses"
-                      multiple
-                      onChange={(e) => {
-                        SetCourses((d) => [...d, e.target.value]);
-                        console.log(e.target.value);
-                      }}
-                    >
-                      {course.map((item, index) => {
-                        return (
-                          <option key={index} value={item}>
-                            {item}
-                          </option>
-                        );
-                      })}
-                    </select> */}
                     <label className="courselabal-wrapp">Course:</label>
-                    {/* <Multiselect
-                      showCheckbox
-                      className=" inputbg-wrap"
-                      required
-                      // placeholder="Courses"
-                      isObject={false}
-                      onSelect={SetCourses}
-                      options={course}
-                      selectedValues={course.selectedValue}
-                      displayValue="name"
-                      onRemove={SetCourses}
-                    />
-                    */}
+
                     <MultiSelect options={course} onChange={handleOnchange} />
                   </div>
                 </div>

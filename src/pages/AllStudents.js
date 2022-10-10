@@ -23,6 +23,7 @@ const AllStudents = () => {
   console.log(studentName);
   console.log(courseintrest);
   console.log(student);
+
   // course Api
 
   const handleOnchange = (val) => {
@@ -33,15 +34,12 @@ const AllStudents = () => {
     SetMobileNo(null);
     SetstudentName(null);
     Setcourseintrest(null);
-
-    // document.getElementById("myForm").reset();
   };
   const getCurses = async () => {
     try {
       const response = await axios.get(
         "https://lionfish-app-hbj76.ondigitalocean.app/api/course/all"
       );
-      // SetsCourses(response.data.course);
       const data = response.data.course;
       const options = data.map((item) => ({
         value: item.title,
@@ -59,7 +57,6 @@ const AllStudents = () => {
 
   // course Api
 
-  // console.log(student);
   const getStudent = async () => {
     try {
       const response = await axios.get(
@@ -68,7 +65,6 @@ const AllStudents = () => {
         }`
       );
       SetStudent(response.data.students);
-      // setcurrentPagenation(response.data);
       setcurrentPagenation(response.data);
     } catch (error) {
       console.log(error);

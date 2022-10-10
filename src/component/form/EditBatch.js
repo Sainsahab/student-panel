@@ -1,10 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { useNavigate, useParams } from "react-router-dom";
+import Moment from "react-moment";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../footer/Footer";
 import Navbar from "../navbar/Navbar";
+
 const EditBatch = () => {
   // const [batchStaringTime, SetbatchStaringTime] = useState("");
   // const [batcEndTime, SetbatcEndTime] = useState("");
@@ -55,6 +57,7 @@ const EditBatch = () => {
       toast.success("Batch  Edited Successfully ");
     } catch (error) {
       console.log(error);
+      toast.error(error.response.data.message);
     }
   };
   return (
@@ -67,7 +70,11 @@ const EditBatch = () => {
       <div>
         <div className="container-fluid">
           <div className="max-width-container application-container mx-auto mt-3">
-            <h4 className="fw-bold"> Edit Batch </h4>
+            <h4 className="fw-bold">
+              <Link to="/batchs" className="pagesLink-wrap">
+                Edit Batch
+              </Link>
+            </h4>
 
             <div id="assesment-container" className="mt-4">
               <div className="application_cover-letter">
@@ -120,10 +127,17 @@ const EditBatch = () => {
                           </div>
                         </div>
                         <div className="panel-group">
+                          <label className="fw-bold">Last Updated Date :</label>
+                          <Moment
+                            format="DD/MM/YYYY"
+                            className="editinputform-date"
+                          >
+                            {batchData.batch_starting_date}
+                          </Moment>
                           <label className="fw-bold">Batch Start Date : </label>
                           <input
                             type="Date"
-                            className="editinputform"
+                            className="editinputform-date"
                             value={batchData.batch_starting_date}
                             onChange={(e) =>
                               SetbatchData({

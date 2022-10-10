@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Footer from "../../component/footer/Footer";
 import Navbar from "../../component/navbar/Navbar";
-import BactchData from "./BatchData.json";
 import Moment from "react-moment";
 
 const Batch = () => {
@@ -60,67 +59,78 @@ const Batch = () => {
           </h2>
 
           <div className="row">
-            {batch.map((item, index) => {
-              return (
-                <>
-                  <div className="col-md-4" key={index}>
-                    <div className="course-card ">
-                      <div className="profile-content">
-                        <div className="profile-title">{item.course} </div>
-                        <div className="profile-overviews">
-                          Batch start on :
-                          <Moment format="DD/MM/YYYY">
-                            {item.batch_starting_date}
-                          </Moment>
-                        </div>
-                        <div className="row">
-                          <div className="col-12">
-                            <div className="profile-overviews">
-                              <div>
-                                <span>Faculty : {item.faculty}</span>
+            <div className="col-md-12">
+              <div className="table table-wrapp">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">course Name</th>
+                      <th scope="col">Batch start on</th>
+                      <th scope="col" className="actionColumn">
+                        Faculty
+                      </th>
+                      <th scope="col">Duration</th>
+                      <th scope="col">Edit</th>
+                    </tr>
+                  </thead>
+
+                  {batch.map((item, index) => {
+                    return (
+                      <>
+                        <tbody>
+                          <tr key={index}>
+                            <td id="profileColumn" className="profileColumn">
+                              <div className="profile_and_premium">
+                                <div className="text">
+                                  <span className="student-nametag">
+                                    {item.course}
+                                  </span>{" "}
+                                </div>
                               </div>
-                            </div>
-                          </div>
-                          <div className="col-12">
-                            <div className="profile-overviews">
-                              <div>
-                                <span>Duration : {item.duration}</span>
-                              </div>
-                            </div>
-                          </div>
-                          {/*
-                        
-                          <div className="col-12">
-                            <div className="profile-overviews">
-                              <div>
-                                <span>Students: {item.Students} </span>
-                              </div>
-                            </div>
-                          </div>
-                        */}
-                          <div className="col-md-6">
-                            <div className="trashedit-icon-wrapp">
-                              <Link
-                                to="#"
-                                onClick={() => deletebatch(item._id)}
-                              >
-                                <i class="fa-solid fa-trash"></i>
-                              </Link>
+                            </td>
+
+                            <td className="status statusColumn">
+                              <Moment format="DD/MM/YYYY">
+                                {item.batch_starting_date}
+                              </Moment>
+                            </td>
+
+                            <td className="applicationcountColumn">
+                              {item.faculty}
+                            </td>
+                            <td className="applicationcountColumn">
+                              {item.duration}
+                            </td>
+
+                            <td className="optionsColumns">
                               <Link
                                 to={"/edit-batch/" + item._id}
                                 className="add-facultybtn ms-3"
                               >
                                 <i className="fa-regular fa-pen-to-square me-3"></i>
                               </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              );
-            })}
+                              <span onClick={() => deletebatch(item._id)}>
+                                <i class="fa-solid fa-trash"></i>
+                              </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </>
+                    );
+                  })}
+                </table>
+              </div>
+              {/*  <ReactPaginate
+            breakLabel="..."
+            nextLabel=">"
+            onPageChange={(e) => setPage(e.selected + 1)}
+            pageRangeDisplayed={currentPagenation.currentPage}
+            pageCount={currentPagenation.totalPages}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            className="reactpagination-wrapp"
+          />*/}
+            </div>
           </div>
         </div>
       </div>

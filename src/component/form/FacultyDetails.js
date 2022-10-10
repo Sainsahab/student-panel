@@ -76,7 +76,11 @@ const FacultyDetails = () => {
       <div>
         <div className="container-fluid">
           <div className="max-width-container application-container mx-auto mt-3">
-            <h4 className="fw-bold"> Edit Faculty Form </h4>
+            <h4 className="fw-bold">
+              <Link to="/all-faculty" className="pagesLink-wrap">
+                Edit Faculty Form
+              </Link>
+            </h4>
             <div className="breadcrumb-container details-container">
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
@@ -97,7 +101,7 @@ const FacultyDetails = () => {
                 </div>
                 <form onSubmit={FacyltyEdit}>
                   <div className="row py-3">
-                    <div className="col-md-8">
+                    <div className="col-md-12">
                       <div
                         className="
           editsinput-wrapp"
@@ -176,22 +180,6 @@ const FacultyDetails = () => {
                             className="editinputform"
                           />
                         </div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="studentimg-wrapper">
-                        <img
-                          src="/img/photo.png"
-                          alt="Photo"
-                          className="img-fluid"
-                        />
-
-                        <label className="file-input-wrapp">
-                          <button className="AddPhoto-btn">
-                            Add photo<i className="fa-solid fa-upload ms-2"></i>
-                          </button>
-                          <input type="file" className="file-input" />
-                        </label>
                       </div>
                     </div>
                   </div>

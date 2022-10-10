@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import facultydata from "../Faculty/facultydata.json";
 import Navbar from "../../component/navbar/Navbar";
 import Footer from "../../component/footer/Footer";
 import { Helmet } from "react-helmet";
@@ -58,35 +57,39 @@ const Faculty = () => {
             </Link>
           </h2>
           <div className="row">
-            {faculty.map((item, index) => {
-              return (
-                <>
-                  <div className="col-md-4" key={index}>
-                    <div className="profile-card-4 text-center">
-                      <img
-                        src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-4.jpg"
-                        className="img img-responsive"
-                        alt="faculty img"
-                      />
-                      <div className="profile-content">
-                        <div className="profile-name">
-                          {item.name}
-                          <p>{item.skills}</p>
-                        </div>
-                        <div className="profile-description">{item.about}</div>
-                        <div className="row">
-                          <div className="col-6">
-                            <div className="edit-icon-wrapp">
-                              <Link to={"/faculty-edit-form/" + item._id}>
-                                <i className="fa-regular fa-pen-to-square me-3"></i>
-                              </Link>
-                              <span onClick={() => deleteFaculty(item._id)}>
-                                <i className="fa-solid fa-trash"></i>
-                              </span>
-                            </div>
-                          </div>
-                          <div className="col-6">
-                            <div className="profile-overview">
+            <div className="col-md-12">
+              <div className="table table-wrapp">
+                <table>
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">skills</th>
+                      <th scope="col" className="actionColumn">
+                        social links{" "}
+                      </th>
+                      <th scope="col">email</th>
+                      <th scope="col">Edit</th>
+                    </tr>
+                  </thead>
+                  {faculty.map((item, index) => {
+                    return (
+                      <>
+                        <tbody>
+                          <tr key={index}>
+                            <td id="profileColumn" className="profileColumn">
+                              <div className="profile_and_premium">
+                                <div className="text">
+                                  <span className="student-nametag">
+                                    {item.name}
+                                  </span>{" "}
+                                </div>
+                              </div>
+                            </td>
+
+                            <td className="status statusColumn">
+                              {item.skills}
+                            </td>
+                            <td className="status statusColumn">
                               <div>
                                 <a href={item.fb_link}>
                                   <i className="fa-brands fa-facebook-f m-2"></i>
@@ -98,15 +101,38 @@ const Faculty = () => {
                                   <i className="fa-brands fa-github m-2"></i>
                                 </a>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              );
-            })}
+                            </td>
+
+                            <td className="applicationcountColumn">
+                              {item.about}
+                            </td>
+
+                            <td className="optionsColumns">
+                              <Link to={"/faculty-edit-form/" + item._id}>
+                                <i className="fa-regular fa-pen-to-square me-3"></i>
+                              </Link>
+                              <span onClick={() => deleteFaculty(item._id)}>
+                                <i className="fa-solid fa-trash"></i>
+                              </span>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </>
+                    );
+                  })}
+                </table>
+              </div>
+              {/*  <ReactPaginate
+              breakLabel="..."
+              nextLabel=">"
+              onPageChange={(e) => setPage(e.selected + 1)}
+              pageRangeDisplayed={currentPagenation.currentPage}
+              pageCount={currentPagenation.totalPages}
+              previousLabel="<"
+              renderOnZeroPageCount={null}
+              className="reactpagination-wrapp"
+            />*/}
+            </div>
           </div>
         </div>
       </div>

@@ -32,6 +32,8 @@ import EditCourse from "./component/form/EditCourse";
 import EditBatch from "./component/form/EditBatch";
 import Studentdatatest from "./component/form/Studentdatatest";
 import "react-multiple-select-dropdown-lite/dist/index.css";
+import Navbar from "./component/navbar/Navbar";
+import Footer from "./component/footer/Footer";
 
 function App() {
   const User = () => {
