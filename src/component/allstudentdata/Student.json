@@ -1,0 +1,10 @@
+[
+    {"name":"Shubham","phoneNo":9876543210,"course":"React js","emailid":"Shubham@gmail.com","status":"joind"},
+    {"name":"Arun","phoneNo":9876543211,"course":"figma","emailid":"arun@gmail.com","status":"joind"},
+    {"name":"Jai","phoneNo":9876543212,"course":"full stak","emailid":"jai@gmail.com","status":"Interested"},
+    {"name":"Parkash","phoneNo":9876543213,"course":"app devlopment","emailid":"parkash@gmail.com","status":"joind"},
+    {"name":"Mahpal","phoneNo":9876543214,"course":"database","emailid":"mahipal@gmail.com","status":"Interested"},
+    {"name":"nishu","phoneNo":9876543215,"course":"acounts","emailid":"nishu@gmail.com","status":"Interested"},
+    {"name":"rakesh","phoneNo":9876543216,"course":"backend","emailid":"rakesh@gmail.com","status":"Interested"},
+    {"name":"ashish","phoneNo":9876543217,"course":"freelinceng","emailid":"ashish@gmail.com","status":"Not Interested"}
+]
