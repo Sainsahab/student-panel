@@ -6,30 +6,21 @@ import Footer from "../footer/Footer";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Multiselect from "multiselect-react-dropdown";
-
-import MultiSelect from "react-multiple-select-dropdown-lite";
 import { toast } from "react-toastify";
-import Select from "react-select";
 import Moment from "react-moment";
 const Studentdatatest = () => {
   const navigate = useNavigate();
   const { _id } = useParams();
   const [course, SetsCourses] = useState([]);
-  const [value, Setvalue] = useState("");
-  const [courseintrests, setcourseintrest] = useState([]);
-  const [courevalue, setcourevalue] = useState([]);
+  const [courseintrests, setcourseintrest] = useState("");
   const [Courseslist, setsScourses] = useState("");
   const Gender = ["male", "female", "other"];
-  const [title, Settitle] = useState("");
   const [student, SetStudent] = useState([]);
-
-  console.log(Courseslist);
+  // const [date] = useState(moment(course.dob));
   console.log(courseintrests);
-
   const handleOnchange = (val) => {
     setcourseintrest(val);
   };
-
   const getCurses = async () => {
     try {
       const response = await axios.get(
@@ -43,13 +34,14 @@ const Studentdatatest = () => {
       console.log(error);
     }
   };
-
-  // const changeHandle = (e) => {
-  //   Setvalue({
-  //     ...student,
-  //     [e.target.value]: e.target.value,
-  //   });
-  // };
+  {
+    /**  const changeDateHandle = (e) => {
+    SetStudent({
+      ...student,
+      dob: e.target.value,
+    });
+  };*/
+  }
   useEffect(() => {
     getCurses();
   }, []);
@@ -63,7 +55,7 @@ const Studentdatatest = () => {
 
       console.log(response.data.student);
       SetStudent(response.data.student);
-      Settitle(response.data.student);
+
       setsScourses(response.data.student);
     } catch (error) {
       console.log(error);
@@ -264,19 +256,22 @@ const Studentdatatest = () => {
                   <div className="row">
                     <div className="col-md-6">
                       <div className="panel-group">
-                        <label className="fw-bold">Date of Birth: </label>
+                        <label className="fw-bold" htmlFor="dob">
+                          Date of Birth:{" "}
+                        </label>
 
-                        <Moment format="YYYY/MM/DD">{student.dob}</Moment>
                         <input
                           format="YYYY/MM/DD"
                           className="datebirth"
+                          type="date"
+                          name="dob"
                           value={student.dob}
-                          // onChange={(e) =>
-                          //   SetStudent({
-                          //     ...student,
-                          //     dob: e.target.value,
-                          //   })
-                          // }
+                          onChange={(e) =>
+                            SetStudent({
+                              ...student,
+                              dob: e.target.value,
+                            })
+                          }
                         />
                       </div>
                     </div>
@@ -397,13 +392,13 @@ const Studentdatatest = () => {
                             defaultValue={student.courseintrest}
                           /> */}{" "}
                           <Multiselect
-                            showCheckbox
+                            // showCheckbox
                             className="inputbg-wrap mx-3"
                             isObject={false}
                             onSelect={handleOnchange}
                             options={course}
                             defaultValue={student.courseintrest}
-                            selectedValues={Courseslist}
+                            selectedValues={student.courseintrest}
                             onRemove={handleOnchange}
                           />
                         </div>

@@ -76,7 +76,7 @@ const AllCourse = () => {
                               <div className="profile_and_premium">
                                 <div className="text">
                                   <span className="student-nametag">
-                                    {item.title}af
+                                    {item.title}
                                   </span>{" "}
                                 </div>
                               </div>
