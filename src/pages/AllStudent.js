@@ -960,7 +960,6 @@ const AllStudent = () => {
                 >
                   <i className="fa-solid fa-magnifying-glass"></i> Search
                 </button>
-
                 <div
                   className="offcanvas offcanvas-end"
                   tabindex="-1"

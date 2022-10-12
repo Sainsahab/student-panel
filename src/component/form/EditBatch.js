@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import Moment from "react-moment";
@@ -34,6 +35,11 @@ const EditBatch = () => {
     getBatchData();
   }, []);
 
+  let batchstartDate = batchData.batch_starting_date;
+
+  let batchDate = moment(batchstartDate).format("YYYY-MM-DD");
+  console.log(batchDate);
+
   const BatchEdit = async (e) => {
     e.preventDefault();
 
@@ -41,7 +47,7 @@ const EditBatch = () => {
 
     data.append("batch_starting_time", batchData.batch_starting_time);
     data.append("batch_ending_time", batchData.batch_ending_time);
-    data.append("batch_starting_date", batchData.batch_starting_date);
+    data.append("batch_starting_date", batchDate);
     data.append("faculty", batchData.faculty);
     data.append("course", batchData.course);
     data.append("duration", batchData.duration);
@@ -138,7 +144,9 @@ const EditBatch = () => {
                           <input
                             type="Date"
                             className="editinputform-date"
-                            value={batchData.batch_starting_date}
+                            value={moment(batchData.batch_starting_date).format(
+                              "YYYY-MM-DD"
+                            )}
                             onChange={(e) =>
                               SetbatchData({
                                 ...batchData,

@@ -1,4 +1,5 @@
 import axios from "axios";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Link, useNavigate, useParams } from "react-router-dom";
@@ -24,6 +25,13 @@ const FacultyDetails = () => {
     }
   };
 
+  let formatDate = FacutyData.dob;
+
+  let responseDate = moment(formatDate).format("YYYY-MM-DD");
+  console.log(responseDate);
+  let joinformatDate = FacutyData.joined_date;
+
+  let joinedDate = moment(joinformatDate).format("YYYY-MM-DD");
   const FacyltyEdit = async (e) => {
     e.preventDefault();
 
@@ -33,12 +41,12 @@ const FacultyDetails = () => {
       skills: FacutyData.skills,
       experience: FacutyData.experience,
       education_qualification: FacutyData.education_qualification,
-      dob: FacutyData.dob,
+      dob: responseDate,
       age: FacutyData.age,
       gender: FacutyData.gender,
-      batch_starting_time: FacutyData.batch_staritng_time,
+      batch_starting_time: FacutyData.batch_starting_time,
       batch_ending_time: FacutyData.batch_ending_time,
-      joined_date: FacutyData.joined_date,
+      joined_date: joinedDate,
       mobile_no: FacutyData.mobile_no,
       email: FacutyData.email,
       fb_link: FacutyData.fb_link,
@@ -110,7 +118,7 @@ const FacultyDetails = () => {
                           <label className="fw-bold">Name : </label>
                           <input
                             type="text"
-                            Value={FacutyData.name}
+                            value={FacutyData.name}
                             onChange={(e) =>
                               SetFacultyData({
                                 ...FacutyData,
@@ -124,7 +132,7 @@ const FacultyDetails = () => {
                           <label className="fw-bold">Address: </label>
                           <input
                             type="text"
-                            Value={FacutyData.address}
+                            value={FacutyData.address}
                             onChange={(e) =>
                               SetFacultyData({
                                 ...FacutyData,
@@ -138,7 +146,7 @@ const FacultyDetails = () => {
                           <label className="fw-bold">Skills:</label>
                           <input
                             type="text"
-                            Value={FacutyData.skills}
+                            value={FacutyData.skills}
                             onChange={(e) =>
                               SetFacultyData({
                                 ...FacutyData,
@@ -152,7 +160,7 @@ const FacultyDetails = () => {
                           <label className="fw-bold">Experience:</label>
                           <input
                             type="text"
-                            Value={FacutyData.experience}
+                            value={FacutyData.experience}
                             onChange={(e) =>
                               SetFacultyData({
                                 ...FacutyData,
@@ -169,7 +177,7 @@ const FacultyDetails = () => {
                           </label>
                           <input
                             type="text"
-                            Value={FacutyData.education_qualification}
+                            value={FacutyData.education_qualification}
                             onChange={(e) =>
                               SetFacultyData({
                                 ...FacutyData,
@@ -190,7 +198,7 @@ const FacultyDetails = () => {
                         <label className="fw-bold">Date of Birth: </label>
                         <input
                           type="date"
-                          Value={FacutyData.dob}
+                          value={moment(FacutyData.dob).format("YYYY-MM-DD")}
                           onChange={(e) =>
                             SetFacultyData({
                               ...FacutyData,
@@ -206,7 +214,7 @@ const FacultyDetails = () => {
                         <label className="fw-bold">age: </label>
                         <input
                           type="text"
-                          Value={FacutyData.age}
+                          value={FacutyData.age}
                           onChange={(e) =>
                             SetFacultyData({
                               ...FacutyData,
@@ -242,11 +250,11 @@ const FacultyDetails = () => {
                         <label>
                           <input
                             type="time"
-                            value={FacutyData.batch_staritng_time}
+                            value={FacutyData.batch_starting_time}
                             onChange={(e) =>
                               SetFacultyData({
                                 ...FacutyData,
-                                batch_staritng_time: e.target.value,
+                                batch_starting_time: e.target.value,
                               })
                             }
                             className="mx-3"
@@ -275,7 +283,9 @@ const FacultyDetails = () => {
                         <label className="fw-bold">Joined Date: </label>
                         <input
                           type="date"
-                          value={FacutyData.joined_date}
+                          value={moment(FacutyData.joined_date).format(
+                            "YYYY-MM-DD"
+                          )}
                           onChange={(e) =>
                             SetFacultyData({
                               ...FacutyData,

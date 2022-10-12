@@ -11,8 +11,8 @@ const AddCourse = () => {
   const [fees, Setfees] = useState("");
   const [duration, Setduration] = useState("");
   const [discription, Setdiscription] = useState("");
-  const [file, Setfile] = useState(null);
-  const [banner, Setbanneer] = useState("");
+  const [file, Setfile] = useState([]);
+
   const navigate = useNavigate();
 
   console.log(file);
@@ -25,8 +25,11 @@ const AddCourse = () => {
     dataArray.append("fees", fees);
     dataArray.append("duration", duration);
     dataArray.append("discription", discription);
-    dataArray.append("file", file);
-    dataArray.append("banner", banner);
+    // dataArray.append("file", file);
+    for (let i = 0; i < file.length; i++) {
+      dataArray.append("file", file[i]);
+    }
+
     console.log(dataArray);
 
     try {
@@ -101,7 +104,7 @@ const AddCourse = () => {
                           <input
                             type="file"
                             className="pdf-file"
-                            onChange={(e) => Setfile(e.target.files[0])}
+                            onChange={(e) => Setfile(e.target.files)}
                           />
                         </div>
                       </div>

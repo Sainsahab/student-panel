@@ -17,7 +17,7 @@ const AllStudents = () => {
 
   const [mobileno, SetMobileNo] = useState("");
   const [studentName, SetstudentName] = useState("");
-  const [courseintrest, Setcourseintrest] = useState("java");
+  const [courseintrest, Setcourseintrest] = useState("");
 
   console.log(mobileno);
   console.log(studentName);
@@ -43,9 +43,9 @@ const AllStudents = () => {
       const data = response.data.course;
       const options = data.map((item) => ({
         value: item.title,
-        label: item.title,
       }));
-      SetsCourses(options);
+
+      SetsCourses(data);
     } catch (error) {
       console.log(error);
     }
@@ -92,7 +92,7 @@ const AllStudents = () => {
         `https://lionfish-app-hbj76.ondigitalocean.app/api/student/search?${
           studentName ? "name=" + studentName : ""
         }${courseintrest ? "&courseintrest=" + courseintrest : ""}${
-          mobileno ? "&mobileno=" + mobileno : ""
+          mobileno ? "&mobileNo=" + mobileno : ""
         }`
       );
       SetStudent(response.data.student);
@@ -669,11 +669,20 @@ const AllStudents = () => {
                     );
                   })}
                 </select>*/}
-                <MultiSelect
-                  options={course}
+
+                <select
+                  className="form-select"
+                  aria-label="Default select example"
+                  placeholder="e.g. 2021"
                   onChange={handleOnchange}
-                  // ref="course"
-                />
+                >
+                  <option value="*">Select Website Code</option>
+                  {course?.map((item, index) => (
+                    <option key={index} value={item.code}>
+                      {item.title}
+                    </option>
+                  ))}
+                </select>
               </div>
 
               <div className="mb-3">

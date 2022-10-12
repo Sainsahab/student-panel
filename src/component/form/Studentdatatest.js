@@ -8,16 +8,16 @@ import axios from "axios";
 import Multiselect from "multiselect-react-dropdown";
 import { toast } from "react-toastify";
 import Moment from "react-moment";
+import moment from "moment";
 const Studentdatatest = () => {
   const navigate = useNavigate();
   const { _id } = useParams();
-  const [course, SetsCourses] = useState([]);
+  const [course, setsCourses] = useState([]);
+  const [student, setStudent] = useState([]);
+  // const [course, SetsCourses] = useState([]);
   const [courseintrests, setcourseintrest] = useState("");
-  const [Courseslist, setsScourses] = useState("");
-  const Gender = ["male", "female", "other"];
-  const [student, SetStudent] = useState([]);
-  // const [date] = useState(moment(course.dob));
-  console.log(courseintrests);
+  console.log(course);
+
   const handleOnchange = (val) => {
     setcourseintrest(val);
   };
@@ -26,46 +26,29 @@ const Studentdatatest = () => {
       const response = await axios.get(
         "https://lionfish-app-hbj76.ondigitalocean.app/api/course/all"
       );
-      console.log(response.data.course);
       const data = response.data.course;
       const options = data.map((item) => item.title);
-      SetsCourses(options);
+      setsCourses(options);
     } catch (error) {
       console.log(error);
     }
   };
-  {
-    /**  const changeDateHandle = (e) => {
-    SetStudent({
-      ...student,
-      dob: e.target.value,
-    });
-  };*/
-  }
-  useEffect(() => {
-    getCurses();
-  }, []);
 
-  console.log(student);
-  const getStudentData = async () => {
+  const getOrder = async () => {
     try {
       const response = await axios.get(
         `https://lionfish-app-hbj76.ondigitalocean.app/api/student/${_id}`
       );
-
       console.log(response.data.student);
-      SetStudent(response.data.student);
-
-      setsScourses(response.data.student);
+      setStudent(response.data.student);
     } catch (error) {
       console.log(error);
     }
   };
+  let formatDate = student.dob;
 
-  useEffect(() => {
-    getStudentData();
-  }, []);
-
+  let responseDate = moment(formatDate).format("YYYY-MM-DD");
+  console.log(responseDate);
   const setudentData = async (e) => {
     e.preventDefault();
     const data = new FormData();
@@ -74,7 +57,7 @@ const Studentdatatest = () => {
     data.append("name", student.name);
     data.append("mobileNo", student.mobileNo);
     data.append("father", student.father);
-    data.append("dob", student.dob);
+    data.append("dob", responseDate);
     data.append("gender", student.gender);
     data.append("age", student.age);
     data.append("bloodgroup", student.bloodgroup);
@@ -105,6 +88,11 @@ const Studentdatatest = () => {
     }
   };
 
+  useEffect(() => {
+    getCurses();
+    getOrder();
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -124,11 +112,9 @@ const Studentdatatest = () => {
               <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                   <li className="breadcrumb-item active" aria-current="page">
-                    {student.title} {student.name}
+                    student name
                   </li>
-                  <div className="applicant_status ms-auto">
-                    {student.status}
-                  </div>
+                  <div className="applicant_status ms-auto"></div>
                 </ol>
               </nav>
             </div>
@@ -142,23 +128,20 @@ const Studentdatatest = () => {
                 </div>
                 <form action="" onSubmit={setudentData}>
                   <div className="row py-3">
-                    <div className="col-md-8">
-                      <div
-                        className="
-                editsinput-wrapp"
-                      >
+                    <div className="col-md-12">
+                      <div className="editsinput-wrapp">
                         <div className="panel-group">
                           <label className="fw-bold">Enrollment ID: </label>
                           <input
                             type="text"
-                            defaultValue={student.enrollmentid}
+                            className="editinputform"
+                            value={student.enrollmentid}
                             onChange={(e) =>
-                              SetStudent({
+                              setStudent({
                                 ...student,
                                 enrollmentid: e.target.value,
                               })
                             }
-                            className="editinputform"
                           />
                         </div>
                         <div className="panel-group">
@@ -166,12 +149,9 @@ const Studentdatatest = () => {
                           <input
                             type="text"
                             className="editinputform"
-                            defaultValue={student.name}
+                            value={student.name}
                             onChange={(e) =>
-                              SetStudent({
-                                ...student,
-                                name: e.target.value,
-                              })
+                              setStudent({ ...student, name: e.target.value })
                             }
                           />
                         </div>
@@ -180,12 +160,9 @@ const Studentdatatest = () => {
                           <input
                             type="text"
                             className="editinputform"
-                            defaultValue={student.father}
+                            value={student.father}
                             onChange={(e) =>
-                              SetStudent({
-                                ...student,
-                                father: e.target.value,
-                              })
+                              setStudent({ ...student, father: e.target.value })
                             }
                           />
                         </div>
@@ -194,9 +171,9 @@ const Studentdatatest = () => {
                           <input
                             type="text"
                             className="editinputform"
-                            defaultValue={student.address}
+                            value={student.address}
                             onChange={(e) =>
-                              SetStudent({
+                              setStudent({
                                 ...student,
                                 address: e.target.value,
                               })
@@ -209,46 +186,30 @@ const Studentdatatest = () => {
                           </label>
                           <input
                             type="text"
-                            defaultValue={student.education}
+                            className="editinputform"
+                            value={student.education}
                             onChange={(e) =>
-                              SetStudent({
+                              setStudent({
                                 ...student,
                                 education: e.target.value,
                               })
                             }
-                            className="editinputform"
                           />
                         </div>
                         <div className="panel-group">
                           <label className="fw-bold">Experience:</label>
                           <input
                             type="text"
-                            defaultValue={student.experience}
+                            className="editinputform"
+                            value={student.experience}
                             onChange={(e) =>
-                              SetStudent({
+                              setStudent({
                                 ...student,
                                 experience: e.target.value,
                               })
                             }
-                            className="editinputform"
                           />
                         </div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="studentimg-wrapper">
-                        <img
-                          src="/img/photo.png"
-                          alt="Photo"
-                          className="img-fluid"
-                        />
-
-                        <label className="file-input-wrapp">
-                          <button className="AddPhoto-btn">
-                            Add photo<i className="fa-solid fa-upload ms-2"></i>
-                          </button>
-                          <input type="file" className="file-input" />
-                        </label>
                       </div>
                     </div>
                   </div>
@@ -261,13 +222,11 @@ const Studentdatatest = () => {
                         </label>
 
                         <input
-                          format="YYYY/MM/DD"
                           className="datebirth"
                           type="date"
-                          name="dob"
-                          value={student.dob}
+                          value={moment(student.dob).format("YYYY-MM-DD")}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               dob: e.target.value,
                             })
@@ -281,9 +240,9 @@ const Studentdatatest = () => {
                         <input
                           type="text"
                           className="datebirth"
-                          Value={student.age}
+                          value={student.age}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               age: e.target.value,
                             })
@@ -302,19 +261,15 @@ const Studentdatatest = () => {
                             type="input"
                             name="gender"
                             className="datebirth"
-                            defaultValue={student.gender}
+                            value={student.gender}
                             onChange={(e) =>
-                              SetStudent({
+                              setStudent({
                                 ...student,
                                 gender: e.target.value,
                               })
                             }
-                            // className="mx-3"
                           />
                         </label>
-                        {/*{Gender.map((item, index) => {
-                          return <></>;
-                        })}*/}
                       </div>
                     </div>
                     <div className="col-md-6">
@@ -323,9 +278,9 @@ const Studentdatatest = () => {
                         <input
                           type="text"
                           className="datebirth"
-                          defaultValue={student.bloodgroup}
+                          value={student.bloodgroup}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               bloodgroup: e.target.value,
                             })
@@ -341,9 +296,9 @@ const Studentdatatest = () => {
                         <input
                           type="number"
                           className="datebirth"
-                          defaultValue={student.mobileNo}
+                          value={student.mobileNo}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               mobileNo: e.target.value,
                             })
@@ -357,9 +312,9 @@ const Studentdatatest = () => {
                         <input
                           type="email"
                           className="datebirth"
-                          defaultValue={student.email}
+                          value={student.email}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               email: e.target.value,
                             })
@@ -373,26 +328,8 @@ const Studentdatatest = () => {
                       <div className="panel-group">
                         <label className="fw-bold">Courses:</label>
                         <div className="couses-wrappr">
-                          {student.courseintrest}
-                          {/**    
-                               <Select
-                            options={course}
-                            isMulti
-                            value={course.value}
-                           
-                            onChange={handleOnchange}
-                            defaultValue={courevalue}
-                            displayValue="key"
-                          />*/}
-                          {/** 
                           <Multiselect
-                            options={course}
-                            onChange={handleOnchange}
-                            // defaultValue={Courseslist}
-                            defaultValue={student.courseintrest}
-                          /> */}{" "}
-                          <Multiselect
-                            // showCheckbox
+                            showCheckbox
                             className="inputbg-wrap mx-3"
                             isObject={false}
                             onSelect={handleOnchange}
@@ -412,9 +349,9 @@ const Studentdatatest = () => {
                         <input
                           type="text"
                           className="selectoption"
-                          defaultValue={student.anyothers}
+                          value={student.anyothers}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               anyothers: e.target.value,
                             })
@@ -427,14 +364,14 @@ const Studentdatatest = () => {
                         <label className="fw-bold">Status : </label>
 
                         <select
+                          className="selectoption"
+                          required
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               status: e.target.value,
                             })
                           }
-                          className="selectoption"
-                          required
                         >
                           <option value="Not Interested">Status</option>
                           <option value="Not Interested">Not Interested</option>
@@ -453,9 +390,9 @@ const Studentdatatest = () => {
                         <input
                           type="text"
                           className="selectoption"
-                          defaultValue={student.totalcoursefees}
+                          value={student.totalcoursefees}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               totalcoursefees: e.target.value,
                             })
@@ -466,17 +403,7 @@ const Studentdatatest = () => {
                     <div className="col-md-6">
                       <div className="panel-group">
                         <label className="fw-bold">Deposited Fee: </label>
-                        <input
-                          type="text"
-                          className="selectoption"
-                          defaultValue={student.depositedfee}
-                          onChange={(e) =>
-                            SetStudent({
-                              ...student,
-                              depositedfee: e.target.value,
-                            })
-                          }
-                        />
+                        <input type="text" className="selectoption" />
                       </div>
                     </div>
                     <div className="col-md-12">
@@ -485,11 +412,11 @@ const Studentdatatest = () => {
                         <input
                           type="text"
                           className="selectoption"
-                          defaultValue={student.feeschedule}
+                          value={student.depositedfee}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
-                              feeschedule: e.target.value,
+                              depositedfee: e.target.value,
                             })
                           }
                         />
@@ -503,9 +430,9 @@ const Studentdatatest = () => {
                         <input
                           type="text"
                           className="selectoption"
-                          defaultValue={student.anyotherforoffice}
+                          value={student.anyotherforoffice}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               anyotherforoffice: e.target.value,
                             })
@@ -521,9 +448,9 @@ const Studentdatatest = () => {
                         <input
                           type="time"
                           className="batch-time"
-                          defaultValue={student.batch_starting_time}
+                          value={student.batch_starting_time}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               batch_starting_time: e.target.value,
                             })
@@ -537,9 +464,9 @@ const Studentdatatest = () => {
                         <input
                           type="time"
                           className="batch-time"
-                          defaultValue={student.batch_ending_time}
+                          value={student.batch_ending_time}
                           onChange={(e) =>
-                            SetStudent({
+                            setStudent({
                               ...student,
                               batch_ending_time: e.target.value,
                             })
